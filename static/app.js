@@ -1,6 +1,6 @@
 const appData = {
   autoRefresh: true,
-  refreshInterval: 1000,
+  refreshInterval: Math.floor(1000 / 30),
   gsTime: 0,
   me: [-1, -1, 0, 0],
   meGuid: -1,
@@ -337,9 +337,9 @@ const apawnStyleFunc = function (feature) {
     case 'CAR':
       const carLabel = this.get('_label') || ''
       if (carLabel == '') {
-        apawnImg = carSvgImg
+      apawnImg = carSvgImg
       } else {
-        apawnImg = carRedSvgImg
+       apawnImg = carRedSvgImg
       }
       break
     default:
@@ -676,21 +676,7 @@ const renderMap = () => {
          [loc[0] + Math.cos(radianAngle) * 512, loc[1] - Math.sin(radianAngle) * 512]]
         )
       )
-    } else { // enemy
-       if (playerObj.team) {
-       label = `${playerObj.team}`
-    } else if (playerObj.name) {
-        label = playerObj.name
-    } else {
-       label = `<${playerObj.name}>`
-     }
-     if (playerObj.kills) {
-        label += `|杀:${playerObj.kills}|`
-     }
-    }
-    if (playerObj.health != null) {
-      label += `|血:${Math.floor(playerObj.health)}|`
-    }
+    } 
     feature.set('_label', label)
     // re-add should be fine
     playerSource.addFeature(feature)
@@ -800,8 +786,8 @@ const updatePlayerLocs = () => {
   if (!vapp.showBox) {
     query += 'noBox=true&'
   }
-  if (!vapp.showCar) {
-    query += 'noCar=true&'
+ if (!vapp.showCar) {
+   query += 'noCar=true&'
   }
   if (!vapp.showAirDrop) {
     query += 'noAirdrop=true&'
